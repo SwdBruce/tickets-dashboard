@@ -1,0 +1,110 @@
+<div class="container-xl">
+  <div class="row row-cards">
+    <div class="col-12">
+      <form action="https://httpbin.org/post" method="post" class="card">
+        <div class="card-header">
+          <h4 class="card-title">Form elements</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-xl-8">
+              <div class="row">
+                <div class="col-md-6 col-xl-12">
+                  <div class="row">
+                    <div class="col-xl-6 mb-3">
+                      <label class="form-label">Text</label>
+                      <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder">
+                    </div>
+                    <div class="col-xl-6 mb-3">
+                      <label class="form-label">Text</label>
+                      <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xl-6 mb-3">
+                      <label class="form-label">Text</label>
+                      <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder">
+                    </div>
+                    <div class="col-xl-6 mb-3">
+                      <label class="form-label">Text</label>
+                      <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-4">
+              <div class="row">
+                <div class="col-md-6 col-xl-12">
+                  <div class="mb-3">
+                    <div class="form-label">Radios</div>
+                    <div>
+                      <label class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="radios"  checked>
+                        <span class="form-check-label">Option 1</span>
+                      </label>
+                      <label class="form-check">
+                        <input class="form-check-input" type="radio"
+                               name="radios" >
+                        <span class="form-check-label">Option 2</span>
+                      </label>
+                      <label class="form-check">
+                        <input class="form-check-input" type="radio"  disabled>
+                        <span class="form-check-label">Option 3</span>
+                      </label>
+                      <label class="form-check">
+                        <input class="form-check-input" type="radio"  checked disabled>
+                        <span class="form-check-label">Option 4</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <div class="form-label">Inline Radios</div>
+                    <div>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="radios-inline"  checked>
+                        <span class="form-check-label">Option 1</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="radios-inline" >
+                        <span class="form-check-label">Option 2</span>
+                      </label>
+                      <label class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                               name="radios-inline"  disabled>
+                        <span class="form-check-label">Option 3</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-xl-12">
+                  <div class="mb-3">
+                    <label class="form-label">Datalist example</label>
+                    <input class="form-control" list="datalistOptions" placeholder="Type to search..."/>
+
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Range input</label>
+                    <input type="range" class="form-range mb-2" value="40" min="0" max="100" step="10">
+                    <div class="form-range mb-2" id="range-simple"></div>
+                    <div class="form-range mb-2" id="range-connect"></div>
+                    <div class="form-range mb-2 text-green" id="range-color"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer text-end">
+          <div class="d-flex">
+            <a href="#" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary ms-auto">Send data</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
