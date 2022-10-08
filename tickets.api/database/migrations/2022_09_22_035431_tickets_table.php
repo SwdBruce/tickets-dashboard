@@ -18,11 +18,15 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->string('titulo');
             $table->text('descripcion')->nullable();
+            $table->integer('area_id')->nullable();
             $table->integer('usuario_id');
             $table->integer('asignado_id')->nullable();
-            $table->integer('categoria_id')->foreign('categoria_id')->references('id')->on('categoria');
-            $table->integer('area_id');
+            $table->integer('tipo')->nullable(); // clasificacion
+            $table->integer('categoria_id')->nullable();
+            $table->integer('urgencia')->nullable();
+            $table->integer('impacto')->nullable();
             $table->integer('estado')->default(TicketModel::CREADO);
+            $table->string('fecha_creacion_txt')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ticket');
     }
 };

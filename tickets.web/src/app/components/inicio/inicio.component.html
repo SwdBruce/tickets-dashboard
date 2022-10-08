@@ -1,7 +1,7 @@
 <div class="container-xl">
   <div class="row row-cards">
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card">
         <div class="card-body">
           <div class="row align-items-center">
@@ -10,11 +10,11 @@
                 TOTAL TICKETS
               </div>
               <div class="h3">
-                1024
+                {{ estadisticasGlobales.total_tickets  }}
               </div>
             </div>
             <div class="col-auto">
-                    <span class="bg-primary-lt text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
+                    <span class="bg-cyan-lt text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ticket" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                          <line x1="15" y1="5" x2="15" y2="7"></line>
@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card">
         <div class="card-body">
           <div class="row align-items-center">
@@ -38,7 +38,7 @@
                 TICKETS CERRADOS
               </div>
               <div class="h3">
-                950
+                {{ estadisticasGlobales.tickets_cerrados }}
               </div>
             </div>
             <div class="col-auto">
@@ -55,16 +55,16 @@
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
       <div class="card">
         <div class="card-body">
           <div class="row align-items-center">
             <div class="col">
               <div class="font-weight-medium">
-                NUEVOS TICKETS
+                TICKETS NUEVOS
               </div>
               <div class="h3">
-                74
+                {{ estadisticasGlobales.tickets_nuevos }}
               </div>
             </div>
             <div class="col-auto">
@@ -83,39 +83,67 @@
       </div>
     </div>
 
+    <div class="col-md-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col">
+              <div class="font-weight-medium">
+                TICKETS PROCESADOS
+              </div>
+              <div class="h3">
+                {{ estadisticasGlobales.tickets_procesados }}
+              </div>
+            </div>
+            <div class="col-auto">
+                    <span class="bg-primary-lt text-white avatar"><!-- Download SVG icon from http://tabler-icons.io/i/currency-dollar -->
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                          <rect x="5" y="5" width="14" height="14" rx="1"></rect>
+                          <path d="M9 9h6v6h-6z"></path>
+                          <path d="M3 10h2"></path>
+                          <path d="M3 14h2"></path>
+                          <path d="M10 3v2"></path>
+                          <path d="M14 3v2"></path>
+                          <path d="M21 10h-2"></path>
+                          <path d="M21 14h-2"></path>
+                          <path d="M14 21v-2"></path>
+                          <path d="M10 21v-2"></path>
+                        </svg>
+                    </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-lg-8 col-sm-12">
       <div class="card">
         <h3 class="card-header">TICKETS PERFORMANCE</h3>
         <div class="card-body">
           <div class="row">
             <div class="col">
-              <div id="chart-active-users-2"></div>
+              <div id="chart-line"></div>
             </div>
             <div class="col-md-auto">
               <div class="divide-y divide-y-fill">
                 <div class="px-3">
                   <div class="text-muted">
-                    <span class="status-dot bg-primary"></span> Importante
+                    <span class="status-dot bg-danger"></span> Incidencia
                   </div>
-                  <div class="h2">11,425</div>
+                  <div class="h2">{{ estadisticasGlobales.total_incidentes }}</div>
                 </div>
                 <div class="px-3">
                   <div class="text-muted">
-                    <span class="status-dot bg-azure"></span> Moderado
+                    <span class="status-dot bg-azure"></span> Consulta
                   </div>
-                  <div class="h2">6,458</div>
+                  <div class="h2">{{ estadisticasGlobales.total_consultas }}</div>
                 </div>
                 <div class="px-3">
                   <div class="text-muted">
-                    <span class="status-dot bg-green"></span> Menor
+                    <span class="status-dot bg-green"></span> General
                   </div>
-                  <div class="h2">3,985</div>
-                </div>
-                <div class="px-3">
-                  <div class="text-muted">
-                    <span class="status-dot bg-green"></span> Ninguno
-                  </div>
-                  <div class="h2">3,985</div>
+                  <div class="h2">{{ estadisticasGlobales.total_general }}</div>
                 </div>
               </div>
             </div>
@@ -125,9 +153,9 @@
     </div>
     <div class="col-lg-4 col-sm-12">
       <div class="card">
-        <h3 class="card-header">TICKETS ACTIVOS</h3>
+        <h3 class="card-header">TICKETS ACTIVOS PROCESADOS</h3>
         <div class="card-body">
-          <div id="chart-demo-pie"></div>
+          <div id="chart-pie"></div>
         </div>
       </div>
     </div>
@@ -135,210 +163,7 @@
     <div class="col-12">
       <div class="card">
         <h3 class="card-header">TICKETS RECIENTES</h3>
-        <div class="card-table table-responsive">
-          <table class="table table-vcenter table-mobile-md card-table">
-            <thead>
-            <tr>
-              <th>Name</th>
-              <th>Title</th>
-              <th>Role</th>
-              <th class="w-1"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-              <td data-label="Name">
-                <div class="d-flex py-1 align-items-center">
-                  <span class="avatar me-2" style="background-image: url(./static/avatars/010m.jpg)"></span>
-                  <div class="flex-fill">
-                    <div class="font-weight-medium">Thatcher Keel</div>
-                    <div class="text-muted"><a href="#" class="text-reset">tkeelf@blogger.com</a></div>
-                  </div>
-                </div>
-              </td>
-              <td data-label="Title">
-                <div>VP Sales</div>
-                <div class="text-muted">Business Development</div>
-              </td>
-              <td class="text-muted" data-label="Role">
-                User
-              </td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="#" class="btn">
-                    Edit
-                  </a>
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                      Actions
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">
-                <div class="d-flex py-1 align-items-center">
-                  <span class="avatar me-2" style="background-image: url(./static/avatars/005f.jpg)"></span>
-                  <div class="flex-fill">
-                    <div class="font-weight-medium">Dyann Escala</div>
-                    <div class="text-muted"><a href="#" class="text-reset">descalag@usatoday.com</a></div>
-                  </div>
-                </div>
-              </td>
-              <td data-label="Title">
-                <div>Mechanical Systems Engineer</div>
-                <div class="text-muted">Sales</div>
-              </td>
-              <td class="text-muted" data-label="Role">
-                Admin
-              </td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="#" class="btn">
-                    Edit
-                  </a>
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                      Actions
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">
-                <div class="d-flex py-1 align-items-center">
-                  <span class="avatar me-2" style="background-image: url(./static/avatars/006f.jpg)"></span>
-                  <div class="flex-fill">
-                    <div class="font-weight-medium">Avivah Mugleston</div>
-                    <div class="text-muted"><a href="#" class="text-reset">amuglestonh@intel.com</a></div>
-                  </div>
-                </div>
-              </td>
-              <td data-label="Title">
-                <div>Actuary</div>
-                <div class="text-muted">Sales</div>
-              </td>
-              <td class="text-muted" data-label="Role">
-                User
-              </td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="#" class="btn">
-                    Edit
-                  </a>
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                      Actions
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">
-                <div class="d-flex py-1 align-items-center">
-                  <span class="avatar me-2">AA</span>
-                  <div class="flex-fill">
-                    <div class="font-weight-medium">Arlie Armstead</div>
-                    <div class="text-muted"><a href="#" class="text-reset">aarmsteadi@yellowpages.com</a></div>
-                  </div>
-                </div>
-              </td>
-              <td data-label="Title">
-                <div>VP Quality Control</div>
-                <div class="text-muted">Accounting</div>
-              </td>
-              <td class="text-muted" data-label="Role">
-                Owner
-              </td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="#" class="btn">
-                    Edit
-                  </a>
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                      Actions
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Name">
-                <div class="d-flex py-1 align-items-center">
-                  <span class="avatar me-2" style="background-image: url(./static/avatars/008f.jpg)"></span>
-                  <div class="flex-fill">
-                    <div class="font-weight-medium">Tessie Curzon</div>
-                    <div class="text-muted"><a href="#" class="text-reset">tcurzonj@hp.com</a></div>
-                  </div>
-                </div>
-              </td>
-              <td data-label="Title">
-                <div>Research Nurse</div>
-                <div class="text-muted">Product Management</div>
-              </td>
-              <td class="text-muted" data-label="Role">
-                Admin
-              </td>
-              <td>
-                <div class="btn-list flex-nowrap">
-                  <a href="#" class="btn">
-                    Edit
-                  </a>
-                  <div class="dropdown">
-                    <button class="btn dropdown-toggle align-text-top" data-bs-toggle="dropdown">
-                      Actions
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a class="dropdown-item" href="#">
-                        Action
-                      </a>
-                      <a class="dropdown-item" href="#">
-                        Another action
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
+        <app-tickets-nuevos [hideProcessarButton]="true"></app-tickets-nuevos>
       </div>
     </div>
 

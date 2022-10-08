@@ -1,0 +1,61 @@
+<table class="table table-vcenter table-mobile-md card-table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Creado por</th>
+    <th>Asignado a</th>
+    <th>Clasificación</th>
+    <th>Urgencia</th>
+    <th>Impacto</th>
+    <th class="w-1"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ticket of ticketsCerrados">
+    <td data-label="title">
+      <div class="text-muted">{{ ticket.id }}</div>
+    </td>
+    <td data-label="title">
+      <div class="text-muted">{{ ticket.titulo }}</div>
+    </td>
+    <td data-label="description">
+      <div class="text-muted">
+        {{ ticket.descripcion }}
+      </div>
+    </td>
+    <td class="text-muted" data-label="created_by">
+      {{ ticket.usuario_id }}
+    </td>
+    <td class="text-muted" data-label="asigned_to">
+      {{ ticket.asignado_id }}
+    </td>
+    <td class="text-muted" data-label="type">
+      {{ ticket.categoria_id }}
+    </td>
+    <td class="text-muted" data-label="impact">
+      <span class="badge">Medio</span>
+    </td>
+    <td class="text-muted" data-label="impact">
+      <span class="badge">Alto</span>
+    </td>
+    <td>
+      <div class="btn-list flex-nowrap">
+        <a href="#" class="btn btn-vk">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-details" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M13 5h8"></path>
+            <path d="M13 9h5"></path>
+            <path d="M13 15h8"></path>
+            <path d="M13 19h5"></path>
+            <rect x="3" y="4" width="6" height="6" rx="1"></rect>
+            <rect x="3" y="14" width="6" height="6" rx="1"></rect>
+          </svg>
+          Detalle
+        </a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use \App\Http\Controllers\UsuarioController;
+use \App\Http\Controllers\EstadisticasGlobalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,3 +26,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     // Se puede usar el siguiente código para resumir las demas rutas
     Route::apiResource('usuario', UsuarioController::class);
 });
+
+Route::get('estadisticas-globales', [EstadisticasGlobalesController::class, 'index']);
+Route::get('tickets-nuevos', [EstadisticasGlobalesController::class, 'ticketsNuevos']);
+Route::get('tickets-procesados', [EstadisticasGlobalesController::class, 'ticketsProcesados']);
+Route::get('tickets-cerrados', [EstadisticasGlobalesController::class, 'ticketsCerrados']);

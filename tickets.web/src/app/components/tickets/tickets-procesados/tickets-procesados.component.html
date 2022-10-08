@@ -1,0 +1,80 @@
+<table class="table table-vcenter table-mobile-md card-table">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Título</th>
+    <th>Descripción</th>
+    <th>Creado por</th>
+    <th>Asignado a</th>
+    <th>Clasificación</th>
+    <th>Urgencia</th>
+    <th>Impacto</th>
+    <th class="w-1"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ticket of ticketsProcesados">
+    <td data-label="title">
+      <div class="text-muted">{{ ticket.id }}</div>
+    </td>
+    <td data-label="title">
+      <div class="text-muted">{{ ticket.titulo }}</div>
+    </td>
+    <td data-label="description">
+      <div class="text-muted">
+        {{ ticket.descripcion }}
+      </div>
+    </td>
+    <td class="text-muted" data-label="created_by">
+      {{ ticket.usuario_id }}
+    </td>
+    <td class="text-muted" data-label="asigned_to">
+      3
+    </td>
+    <td class="text-muted" data-label="type">
+      {{ ticket.categoria_id }}
+    </td>
+    <td class="text-muted" data-label="impact">
+      <span class="badge">
+        Medio
+      </span>
+    </td>
+    <td class="text-muted" data-label="impact">
+      <span class="badge">
+        Alto
+      </span>
+    </td>
+    <td>
+      <div class="btn-list flex-nowrap">
+        <a href="#" class="btn btn-bitbucket">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-minus" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M8 20l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4h4z"></path>
+            <path d="M13.5 6.5l4 4"></path>
+            <path d="M16 18h4"></path>
+          </svg>
+          Editar
+        </a>
+        <a href="#" class="btn btn-danger">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-off" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <circle cx="6" cy="10" r="2"></circle>
+            <path d="M6 6v2"></path>
+            <path d="M6 12v8"></path>
+            <circle cx="12" cy="16" r="2"></circle>
+            <path d="M12 4v4"></path>
+            <path d="M12 12v2"></path>
+            <path d="M12 18v2"></path>
+            <circle cx="18" cy="7" r="2"></circle>
+            <path d="M18 4v1"></path>
+            <path d="M18 9v5"></path>
+            <path d="M18 18v2"></path>
+            <path d="M3 3l18 18"></path>
+          </svg>
+          Cerrar
+        </a>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
