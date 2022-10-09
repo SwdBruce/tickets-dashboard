@@ -11,6 +11,7 @@ import {ApiResponse} from "../../entities/api-response";
 export class UsuariosComponent implements OnInit {
 
   usuariosSoporte: Usuario[] = []
+  usuariosCliente: Usuario[] = []
 
   constructor(private usuarioService: UsuarioService) { }
 
@@ -29,7 +30,7 @@ export class UsuariosComponent implements OnInit {
   cargarUsuariosCliente(): any {
     this.usuarioService.cargarUsuariosCliente().subscribe((response: ApiResponse) => {
       let { extra } = response
-      this.usuariosSoporte = extra
+      this.usuariosCliente = extra
     })
   }
 

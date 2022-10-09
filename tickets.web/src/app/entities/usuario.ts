@@ -1,3 +1,5 @@
+import { Area } from "./area";
+
 export class Usuario {
   id: number = 0
   username: string = ''
@@ -9,4 +11,5 @@ export class Usuario {
   area_id: number = 0
   created_at:any = null
   updated_at:any = null
+  area: Area = new Area()
 }
