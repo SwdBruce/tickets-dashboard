@@ -11,6 +11,30 @@ class UsuarioModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ROLE_ADMIN = 1;
+    const ROLE_SUPPORT = 2;
+    const ROLE_USER = 3;
+    const DESCRIBE_ROLE = [
+        self::ROLE_ADMIN => 'Administrador',
+        self::ROLE_SUPPORT => 'Soporte',
+        self::ROLE_USER => 'Usuarios'
+    ];
+
+    const AREA_ADMINISTRATIVA = 1;
+    const AREA_SOPORTE = 2;
+    const AREA_COMERCIAL = 3;
+    const AREA_OPERACIONES = 4;
+    const AREA_SISTEMAS = 5;
+    const AREA_RECURSOS_HUMANOS = 6;
+    const DESCRIBE_AREA = [
+        self::AREA_ADMINISTRATIVA => 'Administrativa',
+        self::AREA_SOPORTE => 'Soporte',
+        self::AREA_COMERCIAL => 'Comercial',
+        self::AREA_OPERACIONES => 'Operaciones',
+        self::AREA_SISTEMAS => 'Sistemas',
+        self::AREA_RECURSOS_HUMANOS => 'Recursos Humanos'
+    ];
+
     protected $table = 'usuario';
 
     /**

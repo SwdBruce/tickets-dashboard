@@ -137,4 +137,18 @@ class TicketController extends Controller
 
         return response()->success('Ticket eliminado correctamente');
     }
+
+    public function procesar()
+    {
+        $id = request()->id;
+        $ticket = TicketModel::find($id);
+//        $tickets = TicketModel::where('estado', TicketModel::CREADO)->get();
+//
+//        foreach ($tickets as $ticket) {
+//            $ticket->estado = 2;
+//            $ticket->save();
+//        }
+
+        return response()->success('Tickets procesados correctamente');
+    }
 }

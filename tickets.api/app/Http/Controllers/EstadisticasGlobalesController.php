@@ -84,8 +84,11 @@ class EstadisticasGlobalesController extends Controller
 
     public function ticketsNuevos()
     {
-        //ultimos 20 tickets
-        $ticketsNuevos = TicketModel::where('estado', TicketModel::CREADO)->get()->take(20);
+        $ticketsNuevos = TicketModel::where('estado', TicketModel::CREADO)->get()->take(20)->map(function ($ticket) {
+            $ticket->usuario;
+            $ticket->asignado;
+            return $ticket;
+        });
 
         return response()->success('Tickets nuevos', $ticketsNuevos->toArray());
     }
@@ -93,7 +96,11 @@ class EstadisticasGlobalesController extends Controller
     public function ticketsProcesados()
     {
         //ultimos 20 tickets
-        $ticketsProcesados = TicketModel::where('estado', TicketModel::PROCESADO)->get()->take(20);
+        $ticketsProcesados = TicketModel::where('estado', TicketModel::PROCESADO)->get()->take(20)->map(function ($ticket) {
+            $ticket->usuario;
+            $ticket->asignado;
+            return $ticket;
+        });
 
         return response()->success('Tickets procesados', $ticketsProcesados->toArray());
     }
@@ -101,8 +108,12 @@ class EstadisticasGlobalesController extends Controller
     public function ticketsCerrados()
     {
         //ultimos 20 tickets
-        $ticketsCerrados = TicketModel::where('estado', TicketModel::CERRADO)->get()->take(20);
+        $ticketsProcesados = TicketModel::where('estado', TicketModel::CERRADO)->get()->take(20)->map(function ($ticket) {
+            $ticket->usuario;
+            $ticket->asignado;
+            return $ticket;
+        });
 
-        return response()->success('Tickets cerrados', $ticketsCerrados->toArray());
+        return response()->success('Tickets cerrados', $ticketsProcesados->toArray());
     }
 }

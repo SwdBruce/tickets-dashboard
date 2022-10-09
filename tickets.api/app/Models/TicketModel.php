@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TicketModel extends Model
 {
@@ -57,4 +58,14 @@ class TicketModel extends Model
         'area_id',
         'estado'
     ];
+
+    public function usuario(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\UsuarioModel', 'usuario_id');
+    }
+
+    public function asignado(): BelongsTo
+    {
+        return $this->belongsTo('App\Models\UsuarioModel', 'asignado_id');
+    }
 }

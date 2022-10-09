@@ -15,7 +15,16 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        return response()->success('Usuarios obtenidos correctamente', ['usuarios' => UsuarioModel::all()]);
+        $query = request()->query();
+        $tipo = $query['tipo'] ?? null;
+        $usuarios = match ($tipo) {
+            'admin' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_ADMIN)->get(),
+            'soporte' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_SUPPORT)->get(),
+            'usuario' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_USER)->get(),
+            default => UsuarioModel::all(),
+        };
+
+        return response()->success('Usuarios de tipo ' . $tipo . ' obtenidos correctamente', $usuarios->toArray());
     }
 
     /**
