@@ -1,0 +1,124 @@
+<div class="modal modal-blur fade" id="modal-report" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ nombreFormulario }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Título</label>
+          <input type="text" class="form-control" value="{{ ticket.titulo }}" [disabled]="'disabled'">
+        </div>
+        <div class="col-lg-12">
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-control" rows="3" [disabled]="'disabled'">{{ ticket.descripcion }}</textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Creado por</label>
+              <input type="text" class="form-control" value="{{ ticket.usuario.nombres + ' ' +  ticket.usuario.apellidos}}" [disabled]="readOnly">
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Asignado a</label>
+              <select type="text" class="form-select" placeholder="Select a date" id="select-people" value="" [disabled]="readOnly">
+                <option selected disabled>Seleccionar</option>
+                <option *ngFor="let usuario of usuariosSoporte"
+                        value="{{ usuario.id }}"
+                        [selected]="usuario.id == ticket.asignado_id"
+                        data-custom-properties="&lt;span class=&quot;avatar avatar-xs&quot;&gt;JL&lt;/span&gt;">
+                  {{ usuario.nombres + ' ' + usuario.apellidos }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body">
+        <label class="form-label">Clasificación</label>
+        <div class="form-selectgroup-boxes row mb-3">
+          <div class="col-lg-4">
+            <label class="form-selectgroup-item">
+              <input type="radio" name="ticket-type-{{ ticket.id }}" value="1" class="form-selectgroup-input" [checked]="ticket.categoria_id === 1" [disabled]="readOnly">
+              <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Incidencia</span>
+                    </span>
+                  </span>
+            </label>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-selectgroup-item">
+              <input type="radio" name="ticket-type-{{ ticket.id }}" value="1" class="form-selectgroup-input" [checked]="ticket.categoria_id === 2" [disabled]="readOnly">
+              <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">Consulta</span>
+                    </span>
+                  </span>
+            </label>
+          </div>
+          <div class="col-lg-4">
+            <label class="form-selectgroup-item">
+              <input type="radio" name="ticket-type-{{ ticket.id }}" value="1" class="form-selectgroup-input" [checked]="ticket.categoria_id === 3" [disabled]="readOnly">
+              <span class="form-selectgroup-label d-flex align-items-center p-3">
+                    <span class="me-3">
+                      <span class="form-selectgroup-check"></span>
+                    </span>
+                    <span class="form-selectgroup-label-content">
+                      <span class="form-selectgroup-title strong mb-1">General</span>
+                    </span>
+                  </span>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Urgencia</label>
+              <select class="form-select" [disabled]="readOnly">
+                <option selected disabled>Seleccionar</option>
+                <option value="4" [selected]="ticket.urgencia === 4">Alto</option>
+                <option value="3" [selected]="ticket.urgencia === 3">Medio</option>
+                <option value="2" [selected]="ticket.urgencia === 2">Bajo</option>
+                <option value="1" [selected]="ticket.urgencia === 1">Ninguno</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="mb-3">
+              <label class="form-label">Impacto</label>
+              <select class="form-select" [disabled]="readOnly">
+                <option selected disabled>Seleccionar</option>
+                <option value="4" [selected]="ticket.impacto === 4">Alto</option>
+                <option value="3" [selected]="ticket.impacto === 3">Medio</option>
+                <option value="2" [selected]="ticket.impacto === 2">Bajo</option>
+                <option value="1" [selected]="ticket.impacto === 1">Ninguno</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <!--<a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+          &lt;!&ndash; Download SVG icon from http://tabler-icons.io/i/plus &ndash;&gt;
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Create new report
+        </a>-->
+      </div>
+    </div>
+  </div>
+</div>

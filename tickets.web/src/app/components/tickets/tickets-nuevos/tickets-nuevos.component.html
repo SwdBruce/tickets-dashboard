@@ -1,5 +1,5 @@
-<button *ngIf="!hideProcessarButton"
-        (click)="procesarTicket()"
+<button *ngIf="!hideProcesarButton"
+        (click)="procesarTickets()"
         type="button" class="btn btn-primary mb-3" data-bs-toggle="tooltip" data-bs-placement="right" title="Clasificar ticket y asignar personal">
   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -39,11 +39,11 @@
       <div class="text-muted">{{ ticket.descripcion }}</div>
     </td>
     <td class="text-muted" data-label="created_by">
-      {{ ticket.usuario_id }}
+      {{ ticket.usuario.nombres }} {{ ticket.usuario.apellidos }}
     </td>
     <td>
       <div class="btn-list flex-nowrap">
-        <a href="#" class="btn btn-vk">
+        <button class="btn btn-vk" data-bs-toggle="modal" [attr.data-bs-target]="'#modal-report'" (click)="verDetalleTicket(ticket)">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-details" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M13 5h8"></path>
@@ -54,13 +54,13 @@
             <rect x="3" y="14" width="6" height="6" rx="1"></rect>
           </svg>
           Detalle
-        </a>
+        </button>
         <div class="dropdown">
           <button class="btn btn-cyan dropdown-toggle align-text-top" data-bs-toggle="dropdown">
             Opciones
           </button>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="procesarTickets(ticket.id)">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-cpu" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <rect x="5" y="5" width="14" height="14" rx="1"></rect>
@@ -75,7 +75,7 @@
                 <path d="M10 21v-2"></path>
               </svg>
               Procesar
-            </a>
+            </button>
             <a class="dropdown-item" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-off" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -101,3 +101,5 @@
   </tr>
   </tbody>
 </table>
+
+<app-ticket-detalle [ticket]="ticketSeleccionado" [readOnly]="true" [nombreFormulario]="'Detalle del Ticket #' + ticketSeleccionado.id"></app-ticket-detalle>

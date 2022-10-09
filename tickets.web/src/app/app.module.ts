@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {HttpClientModule} from "@angular/common/http";
     TicketsProcesadosComponent,
     TicketsCerradosComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    TicketDetalleComponent
   ],
   imports: [
     BrowserModule,

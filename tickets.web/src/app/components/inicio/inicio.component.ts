@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {TicketsService} from "../../services/tickets.service";
+import Swal from "sweetalert2";
+import {EstadisticasGlobales} from "../../entities/estadisticas-globales";
+import {ApiResponse} from "../../entities/api-response";
 declare var ApexCharts: any
 declare var tabler: any
 declare var window: any
@@ -13,23 +16,29 @@ export class InicioComponent implements OnInit {
 
   linealChart: any
   pieChart: any
-  estadisticasGlobales: any
+  estadisticasGlobales: EstadisticasGlobales = new EstadisticasGlobales()
   cargandoEstadisticas: boolean = true
 
-  constructor(private ticketsService: TicketsService) {
+  constructor(private ticketsService: TicketsService) {}
+
+  ngOnInit(): void {
     this.cargarEstadisticasGlobales()
   }
 
-  ngOnInit(): void {
-
-  }
-
   cargarEstadisticasGlobales(): any {
-    this.ticketsService.estadisticasGlobales().subscribe((response: any) => {
+    //this.mostrarModalCargando()
+    this.ticketsService.estadisticasGlobales().subscribe((response: ApiResponse) => {
       let { extra } = response
       this.estadisticasGlobales = extra
       this.cargandoEstadisticas = false
       this.loadScript()
+      Swal.close()
+    }, (error: any) => {
+      Swal.fire({
+        title: 'Error',
+        text: 'No se pudieron cargar las estadísticas globales',
+        icon: 'error'
+      })
     })
   }
 
@@ -146,6 +155,17 @@ export class InicioComponent implements OnInit {
           fillSeriesColor: false
         },
       })).render()
+  }
+
+  mostrarModalCargando() {
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Cargando estadísticas globales',
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
   }
 
   ngOnDestroy() {
