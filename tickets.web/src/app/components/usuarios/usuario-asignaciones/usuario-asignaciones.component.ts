@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Ticket} from "../../../entities/ticket";
+import {Usuario} from "../../../entities/usuario";
 
 @Component({
   selector: 'app-usuario-asignaciones',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsuarioAsignacionesComponent implements OnInit {
 
+  @Input() ticketsAsignados: Ticket[] = []
+
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

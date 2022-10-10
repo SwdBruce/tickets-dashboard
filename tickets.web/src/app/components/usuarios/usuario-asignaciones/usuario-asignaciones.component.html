@@ -1,1 +1,42 @@
-<p>usuario-asignaciones works!</p>
+<div class="modal modal-blur fade" id="modal-usuario-asignaciones" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Asignaciones del usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-vcenter table-mobile-md card-table">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Creado por</th>
+            <th class="w-1"></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ticket of this.ticketsAsignados">
+            <td data-label="title">
+              <div class="text-muted">{{ ticket.id }}</div>
+            </td>
+            <td data-label="title">
+              <div class="text-muted">{{ ticket.titulo }}</div>
+            </td>
+            <td data-label="description">
+              <div class="text-muted">{{ ticket.descripcion }}</div>
+            </td>
+            <td class="text-muted" data-label="created_by">
+              {{ ticket.usuario.nombres }} {{ ticket.usuario.apellidos }}
+            </td>
+          </tr>
+          <tr *ngIf="this.ticketsAsignados.length === 0">
+            <td colspan="5" class="text-center">No se encontraron tickets asignados</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

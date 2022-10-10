@@ -16,6 +16,7 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
 import { UsuarioAsignacionesComponent } from './components/usuarios/usuario-asignaciones/usuario-asignaciones.component';
+import { UsuarioHistorialComponent } from './components/usuarios/usuario-historial/usuario-historial.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UsuarioAsignacionesComponent } from './components/usuarios/usuario-asig
     LoginComponent,
     DashboardComponent,
     TicketDetalleComponent,
-    UsuarioAsignacionesComponent
+    UsuarioAsignacionesComponent,
+    UsuarioHistorialComponent
   ],
   imports: [
     BrowserModule,

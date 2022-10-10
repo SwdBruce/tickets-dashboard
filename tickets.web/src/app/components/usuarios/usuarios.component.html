@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="d-flex">
-          <a href="#" class="card-btn">
+          <a class="card-btn cursor-pointer" data-bs-toggle="modal" [attr.data-bs-target]="'#modal-usuario-asignaciones'" (click)="cargarTicketsAsignados(usuarioSoporte)">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-ad-2" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <path d="M11.933 5h-6.933v16h13v-8"></path>
@@ -25,7 +25,7 @@
             </svg>
             Asignaciones
           </a>
-          <a href="#" class="card-btn">
+          <a class="card-btn">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-history" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <polyline points="12 8 12 12 14 14"></polyline>
@@ -38,3 +38,5 @@
     </div>
   </div>
 </div>
+
+<app-usuario-asignaciones [ticketsAsignados]="ticketsAsignados"></app-usuario-asignaciones>
