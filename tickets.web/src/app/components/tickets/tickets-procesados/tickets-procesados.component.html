@@ -32,15 +32,15 @@
       {{ ticket.asignado.nombres }} {{ ticket.asignado.apellidos }}
     </td>
     <td class="text-muted" data-label="type">
-      <span class="status status-{{ ticket.categoria.color }}">
-        {{ ticket.categoria.descripcion }}
+      <span class="status status-{{ ticket.categoria ? ticket.categoria.color : '' }}">
+        {{ ticket.categoria ? ticket.categoria.descripcion : '' }}
       </span>
     </td>
     <td class="text-muted" data-label="urgency">
-      <span class="badge bg-{{ ticket.urgencia.color }} me-1"></span>{{ ticket.urgencia.descripcion }}
+      <span class="badge bg-{{ ticket.urgencia ? ticket.urgencia.color : '' }} me-1"></span>{{ ticket.urgencia ? ticket.urgencia.descripcion : '' }}
     </td>
     <td class="text-muted" data-label="impact">
-      <span class="badge bg-{{ ticket.impacto.color }} me-1"></span>{{ ticket.impacto.descripcion }}
+      <span class="badge bg-{{ ticket.impacto ? ticket.impacto.color : '' }} me-1"></span>{{ ticket.impacto ? ticket.impacto.descripcion : '' }}
     </td>
     <td>
       <app-ticket-detalle
