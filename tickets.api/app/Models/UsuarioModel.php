@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class UsuarioModel extends Authenticatable
+class UsuarioModel extends Authenticatable  implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use Notifiable;
 
     const ROLE_ADMIN = 1;
     const ROLE_SUPPORT = 2;
@@ -73,5 +74,20 @@ class UsuarioModel extends Authenticatable
     public function area(): BelongsTo
     {
         return $this->belongsTo(AreaModel::class, 'area_id');
+    }
+
+    public function rol(): BelongsTo
+    {
+        return $this->belongsTo(RolModel::class, 'rol_id');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

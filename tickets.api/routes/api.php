@@ -20,7 +20,7 @@ use App\Http\Controllers\TicketController;
 // Authentication
 Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['middleware' => 'auth:sanctum'], function () {
+Route::group(['middleware' => 'api', 'prefix' => 'auth'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
 
     // Se puede usar el siguiente código para resumir las demas rutas

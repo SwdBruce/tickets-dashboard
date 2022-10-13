@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:api', ['except' => ['login']]);
+    }
+
     public function login(Request $request) : Response
     {
         $validator = Validator::make($request->post(), [
@@ -21,13 +26,16 @@ class AuthController extends Controller
             return response()->error('Parámetros incorrectos.', $validator->errors()->toArray());
         }
 
-        $user = UsuarioModel::where('username', $request->username)->first();
+        $credentials = request(['username', 'password']);
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            return response()->error('Credenciales incorrectas');
+        if (! $token = auth()->attempt($credentials)) {
+            return response()->error('Usuario o contraseña incorrectos.');
         }
 
-        $token = $user->createToken($request->username)->plainTextToken;
+        $user = UsuarioModel::where('username', $request->username)->first();
+        $user->rol;
+
+        $token = auth()->claims(['user_data' => $user])->attempt($credentials);
 
         return response()->success('Inicio de sesión exitoso', ['token' => $token]);
     }
