@@ -6,6 +6,7 @@ import { TicketsComponent } from "./components/tickets/tickets.component";
 import {LoginComponent} from "./components/login/login.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {MisTicketsComponent} from "./components/mis-tickets/mis-tickets.component";
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   {
@@ -13,10 +14,10 @@ const routes: Routes = [
   },
   {
     path: 'dashboard', component: DashboardComponent, children: [
-      { path: 'inicio', component: InicioComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'tickets', component: TicketsComponent },
-      { path: 'mis-tickets', component: MisTicketsComponent },
+      { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+      { path: 'tickets', component: TicketsComponent, canActivate: [AuthGuard] },
+      { path: 'mis-tickets', component: MisTicketsComponent, canActivate: [AuthGuard] },
       {
         path: '**', redirectTo: 'dashboard/inicio'
       }

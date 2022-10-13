@@ -1,4 +1,5 @@
 import { Area } from "./area";
+import { Rol } from "./rol";
 
 export class Usuario {
   id: number = 0
@@ -12,4 +13,5 @@ export class Usuario {
   created_at:any = null
   updated_at:any = null
   area: Area = new Area()
+  rol: Rol = new Rol()
 }

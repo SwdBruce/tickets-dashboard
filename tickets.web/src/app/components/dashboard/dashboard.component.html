@@ -12,18 +12,18 @@
         <div class="nav-item dropdown">
           <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
             <div class="d-none d-xl-block ps-2" style="margin-right: 20px">
-              <div>JOE DOE</div>
-              <div class="mt-1 small text-muted">Administrador</div>
+              <div>{{ userData.nombres }} {{ userData.apellidos }}</div>
+              <div class="mt-1 small text-muted">{{ userData.rol.nombre }}</div>
             </div>
             <span class="avatar avatar" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZSYRD7x5lbWCQWY6vycxxPRIDzxPfHDg6icmiEqu2Do4fKHO39FwADsuZM00UoW-TPI0&usqp=CAU)"></span>
           </a>
           <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-            <a href="#" class="dropdown-item">Status</a>
-            <a href="#" class="dropdown-item">Profile</a>
-            <a href="#" class="dropdown-item">Feedback</a>
-            <div class="dropdown-divider"></div>
-            <a href="./settings.html" class="dropdown-item">Settings</a>
-            <a href="./sign-in.html" class="dropdown-item">Logout</a>
+<!--            <a href="#" class="dropdown-item">Status</a>-->
+<!--            <a href="#" class="dropdown-item">Profile</a>-->
+<!--            <a href="#" class="dropdown-item">Feedback</a>-->
+<!--            <div class="dropdown-divider"></div>-->
+<!--            <a href="./settings.html" class="dropdown-item">Settings</a>-->
+            <a [routerLink]="'/login'" class="dropdown-item">Logout</a>
           </div>
         </div>
       </div>
