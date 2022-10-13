@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {ApiResponse} from "../entities/api-response";
 import Swal from "sweetalert2";
+import {Ticket} from "../entities/ticket";
 
 @Injectable({
   providedIn: 'root'
@@ -54,5 +55,13 @@ export class TicketsService {
       urgencia_id: ticket.urgencia_id,
       impacto_id: ticket.impacto_id
     })
+  }
+
+  crearTicket(ticket: Ticket): any {
+    return this.http.post<ApiResponse>(`${ this.baseUrl }/tickets`, ticket)
+  }
+
+  cargarMisTickets(usuarioId: number): any {
+    return this.http.get<ApiResponse>(`${ this.baseUrl }/tickets/mis-tickets/${ usuarioId }`)
   }
 }

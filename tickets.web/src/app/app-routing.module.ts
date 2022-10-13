@@ -5,6 +5,7 @@ import { UsuariosComponent } from "./components/usuarios/usuarios.component";
 import { TicketsComponent } from "./components/tickets/tickets.component";
 import {LoginComponent} from "./components/login/login.component";
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {MisTicketsComponent} from "./components/mis-tickets/mis-tickets.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'inicio', component: InicioComponent },
       { path: 'usuarios', component: UsuariosComponent },
       { path: 'tickets', component: TicketsComponent },
+      { path: 'mis-tickets', component: MisTicketsComponent },
       {
         path: '**', redirectTo: 'dashboard/inicio'
       }

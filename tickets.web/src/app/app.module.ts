@@ -17,6 +17,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { TicketDetalleComponent } from './components/ticket-detalle/ticket-detalle.component';
 import { UsuarioAsignacionesComponent } from './components/usuarios/usuario-asignaciones/usuario-asignaciones.component';
 import { UsuarioHistorialComponent } from './components/usuarios/usuario-historial/usuario-historial.component';
+import { MisTicketsComponent } from './components/mis-tickets/mis-tickets.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UsuarioHistorialComponent } from './components/usuarios/usuario-histori
     DashboardComponent,
     TicketDetalleComponent,
     UsuarioAsignacionesComponent,
-    UsuarioHistorialComponent
+    UsuarioHistorialComponent,
+    MisTicketsComponent
   ],
   imports: [
     BrowserModule,

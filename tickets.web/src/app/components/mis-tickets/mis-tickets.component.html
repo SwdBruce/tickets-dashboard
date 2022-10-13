@@ -1,0 +1,133 @@
+<div class="page-header d-print-none mb-3">
+  <div class="container-xl">
+    <div class="row g-2 align-items-center">
+      <div class="col">
+        <!-- Page pre-title -->
+        <div class="page-pretitle">
+          Vista General
+        </div>
+        <h2 class="page-title">
+          Mis Tickets
+        </h2>
+      </div>
+      <!-- Page title actions -->
+      <div class="col-12 col-md-auto ms-auto d-print-none">
+        <div class="btn-list">
+          <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-crear-ticket">
+            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Crear Ticket
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-xl">
+  <div class="row row-cards">
+    <div class="col-12">
+      <div class="card">
+        <table class="table table-vcenter table-mobile-md card-table">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Asignado a</th>
+            <th>Clasificación</th>
+            <th>Urgencia</th>
+            <th>Impacto</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let ticket of misTickets">
+            <td data-label="title">
+              <div class="text-muted">{{ ticket.id }}</div>
+            </td>
+            <td data-label="title">
+              <div class="text-muted">{{ ticket.titulo }}</div>
+            </td>
+            <td data-label="description">
+              <div class="text-muted">
+                {{ ticket.descripcion }}
+              </div>
+            </td>
+            <td class="text-muted" data-label="type">
+              <span class="status status-{{ utilService.ticketEstadoColor(ticket.estado) }}">
+                {{ utilService.ticketEstadoDescripcion(ticket.estado) }}
+              </span>
+            </td>
+            <td class="text-muted" data-label="asigned_to">
+              {{ ticket.asignado ? ticket.asignado.nombres + ' ' +  ticket.asignado.apellidos : '' }}
+            </td>
+            <td class="text-muted" data-label="type">
+              <span class="{{ ticket.categoria ? 'status status-' + ticket.categoria.color : '' }}">
+                {{ ticket.categoria ? ticket.categoria.descripcion : '' }}
+              </span>
+            </td>
+            <td class="text-muted" data-label="urgency">
+              <span class="{{ ticket.urgencia ? 'badge bg-' + ticket.urgencia.color : '' }} me-1"></span>{{ ticket.urgencia ? ticket.urgencia.descripcion : '' }}
+            </td>
+            <td class="text-muted" data-label="impact">
+              <span class="{{ ticket.impacto ? 'badge bg-' + ticket.impacto.color : '' }} me-1"></span>{{ ticket.impacto ? ticket.impacto.descripcion : '' }}
+            </td>
+          </tr>
+          <tr *ngIf="misTickets.length == 0">
+            <td colspan="9" class="text-center">
+              <div class="text-muted">No se encontraron tickets recientes</div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal modal-blur fade" id="modal-crear-ticket" tabindex="-1" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Crear ticket nuevo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label class="form-label">Area</label>
+          <select class="form-select" #area>
+            <option selected disabled>Seleccionar</option>
+            <option value="6">Recursos Humanos</option>
+            <option value="5">Sistemas</option>
+            <option value="4">Operaciones</option>
+            <option value="3">Comercial</option>
+            <option value="2">Soporte</option>
+            <option value="1">Administrativa</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Título</label>
+          <input type="text" class="form-control" value="" #titulo>
+        </div>
+        <div class="col-lg-12">
+          <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <textarea class="form-control" rows="3" #descripcion></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-link link-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button class="btn btn-primary ms-auto" data-bs-dismiss="modal" (click)="guardarTicket()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Crear ticket
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
