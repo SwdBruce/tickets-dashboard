@@ -2,7 +2,7 @@
 Proyecto de la universidad
 
 ## Esquema de la base de datos
-![](tickets.api/storage/app/public/dashboard_tickets.png)
+![](tickets.api/docs/dashboard_tickets.png)
 
 ## Tecnologías utilizadas
 - PHP 8.0
