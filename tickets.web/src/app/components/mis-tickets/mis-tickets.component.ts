@@ -4,6 +4,8 @@ import {Ticket} from "../../entities/ticket";
 import {ApiResponse} from "../../entities/api-response";
 import {UtilService} from "../../services/util.service";
 import Swal from "sweetalert2";
+import {AuthService} from "../../services/auth.service";
+import {Usuario} from "../../entities/usuario";
 
 @Component({
   selector: 'app-mis-tickets',
@@ -16,15 +18,18 @@ export class MisTicketsComponent implements OnInit {
   @ViewChild('titulo') titulo: any
   @ViewChild('descripcion') descripcion: any
   misTickets: Ticket[] = []
+  userData!: Usuario
 
-  constructor(private ticketsService: TicketsService, public utilService: UtilService) { }
+  constructor(private ticketsService: TicketsService, public utilService: UtilService, private authService: AuthService) {
+    this.userData = this.authService.getUserData()
+  }
 
   ngOnInit(): void {
     this.cargarTicketsCreados()
   }
 
   cargarTicketsCreados(): any {
-    this.ticketsService.cargarMisTickets(1).subscribe((response: ApiResponse) => {
+    this.ticketsService.cargarMisTickets(this.userData.id).subscribe((response: ApiResponse) => {
       this.misTickets = response.extra
     })
   }
@@ -34,7 +39,7 @@ export class MisTicketsComponent implements OnInit {
     ticket.area_id = this.area.nativeElement.value
     ticket.titulo = this.titulo.nativeElement.value
     ticket.descripcion = this.descripcion.nativeElement.value
-    ticket.usuario_id = 1
+    ticket.usuario_id = this.userData.id
     this.ticketsService.crearTicket(ticket).subscribe((response: ApiResponse) => {
       let { type, message } = response
       if (type === 'error') {
