@@ -155,15 +155,52 @@ class TicketController extends Controller
     public function procesar()
     {
         $id = request()->id;
-        $ticket = TicketModel::find($id);
-//        $tickets = TicketModel::where('estado', TicketModel::CREADO)->get();
-//
-//        foreach ($tickets as $ticket) {
-//            $ticket->estado = 2;
-//            $ticket->save();
-//        }
 
-        return response()->success('Tickets procesados correctamente');
+        if ($id) {
+            $ticket = TicketModel::find($id);
+            $success = $this->clasificarTicket($ticket);
+
+            if ($success) {
+                return response()->success("Ticket #$id procesado correctamente.", $ticket->toArray());
+            } else {
+                return response()->error('Error al procesar el ticket #' . $id);
+            }
+        } else {
+            // procesar todos los tickets
+            $tickets = TicketModel::where('estado', TicketModel::CREADO)->get()->take(20);
+            $ticketsProcesados = [];
+            foreach ($tickets as $ticket) {
+                $success = $this->clasificarTicket($ticket);
+                if ($success) {
+                    $ticketsProcesados[] = $ticket->id;
+                }
+            }
+
+            return response()->success('Tickets procesados correctamente', $ticketsProcesados);
+        }
+    }
+
+    private function clasificarTicket($ticket): bool
+    {
+        // obtener valor de varible de entorno
+        $endPoint = env('ML_API', '');
+        $response = \Http::post($endPoint, [
+            'description' => $ticket->descripcion
+        ]);
+
+        if ($response->successful()) {
+            $data = $response->json();
+            $ticket->asignado_id = rand(1, 50);
+            $ticket->categoria_id = $data['category'];
+            $ticket->impacto_id = $data['impact'];
+            $ticket->urgencia_id = $data['urgency'];
+            $ticket->estado = TicketModel::PROCESADO;
+            $ticket->save();
+
+            return true;
+        }
+
+        return false;
     }
 
     public function cerrar()
