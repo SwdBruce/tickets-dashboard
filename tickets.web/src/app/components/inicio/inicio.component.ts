@@ -26,7 +26,7 @@ export class InicioComponent implements OnInit {
   }
 
   cargarEstadisticasGlobales(): any {
-    //this.mostrarModalCargando()
+    this.mostrarModalCargando()
     this.ticketsService.estadisticasGlobales().subscribe((response: ApiResponse) => {
       let { extra } = response
       this.estadisticasGlobales = extra

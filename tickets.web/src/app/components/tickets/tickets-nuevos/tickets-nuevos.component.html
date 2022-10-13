@@ -42,8 +42,12 @@
       {{ ticket.usuario.nombres }} {{ ticket.usuario.apellidos }}
     </td>
     <td>
+      <app-ticket-detalle [ticket]="ticket"
+                          [readOnly]="true" [nombreFormulario]="'Detalle del Ticket #' + ticket.id"
+                          [modalId]="'nuevo-ticket-' + ticket.id" [usuariosSoporte]="usuariosSoporte">
+      </app-ticket-detalle>
       <div class="btn-list flex-nowrap">
-        <button class="btn btn-vk" data-bs-toggle="modal" [attr.data-bs-target]="'#modal-report'" (click)="verDetalleTicket(ticket)">
+        <button class="btn btn-vk" data-bs-toggle="modal" [attr.data-bs-target]="'#nuevo-ticket-' + ticket.id">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-details" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M13 5h8"></path>
@@ -76,7 +80,7 @@
               </svg>
               Procesar
             </button>
-            <a class="dropdown-item" href="#">
+            <button class="dropdown-item" (click)="cerrarTicket(ticket.id)">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-off" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <circle cx="6" cy="10" r="2"></circle>
@@ -93,7 +97,7 @@
                 <path d="M3 3l18 18"></path>
               </svg>
               Cerrar
-            </a>
+            </button>
           </div>
         </div>
       </div>
@@ -101,5 +105,3 @@
   </tr>
   </tbody>
 </table>
-
-<app-ticket-detalle [ticket]="ticketSeleccionado" [readOnly]="true" [nombreFormulario]="'Detalle del Ticket #' + ticketSeleccionado.id"></app-ticket-detalle>

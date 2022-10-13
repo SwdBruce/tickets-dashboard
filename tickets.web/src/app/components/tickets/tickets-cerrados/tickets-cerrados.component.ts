@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {TicketsService} from "../../../services/tickets.service";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Usuario} from "../../../entities/usuario";
 
 @Component({
   selector: 'app-tickets-cerrados',
@@ -8,15 +8,15 @@ import {TicketsService} from "../../../services/tickets.service";
 })
 export class TicketsCerradosComponent implements OnInit {
 
-  ticketsCerrados: any = []
+  @Output() notificarActualizacionTickets: EventEmitter<boolean> = new EventEmitter<boolean>()
+  @Input() ticketsCerrados: any = []
+  @Input() usuariosSoporte: Usuario[] = []
 
-  constructor(private ticketsService: TicketsService) { }
+  constructor() { }
 
-  ngOnInit(): void {
-    this.ticketsService.cargarTicketsNuevos().subscribe((response: any) => {
-      let { extra } = response
-      this.ticketsCerrados = extra
-    })
+  ngOnInit(): void { }
+
+  actualizandoTickets(): any {
+    this.notificarActualizacionTickets.emit(true)
   }
-
 }

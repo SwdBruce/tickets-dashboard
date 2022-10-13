@@ -41,4 +41,18 @@ export class TicketsService {
     let uri = !id ? `procesar` : `procesar/${ id }`
     return this.http.get<ApiResponse>(`${ this.baseUrl }/tickets/${ uri }`)
   }
+
+  cerrarTicket(id: number): any {
+    return this.http.get<ApiResponse>(`${ this.baseUrl }/tickets/cerrar/${ id }`)
+  }
+
+  editarTicket(id: number, ticket: any): any {
+    return this.http.put<ApiResponse>(`${ this.baseUrl }/tickets/${ id }`, {
+      titulo: ticket.titulo, // el titulo es requerido
+      asignado_id: ticket.asignado_id,
+      categoria_id: ticket.categoria_id,
+      urgencia_id: ticket.urgencia_id,
+      impacto_id: ticket.impacto_id
+    })
+  }
 }

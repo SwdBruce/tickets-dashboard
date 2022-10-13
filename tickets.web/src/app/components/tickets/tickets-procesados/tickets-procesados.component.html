@@ -26,27 +26,33 @@
       </div>
     </td>
     <td class="text-muted" data-label="created_by">
-      {{ ticket.usuario_id }}
+      {{ ticket.usuario.nombres }} {{ ticket.usuario.apellidos }}
     </td>
     <td class="text-muted" data-label="asigned_to">
-      3
+      {{ ticket.asignado.nombres }} {{ ticket.asignado.apellidos }}
     </td>
     <td class="text-muted" data-label="type">
-      {{ ticket.categoria_id }}
-    </td>
-    <td class="text-muted" data-label="impact">
-      <span class="badge">
-        Medio
+      <span class="status status-{{ ticket.categoria.color }}">
+        {{ ticket.categoria.descripcion }}
       </span>
     </td>
+    <td class="text-muted" data-label="urgency">
+      <span class="badge bg-{{ ticket.urgencia.color }} me-1"></span>{{ ticket.urgencia.descripcion }}
+    </td>
     <td class="text-muted" data-label="impact">
-      <span class="badge">
-        Alto
-      </span>
+      <span class="badge bg-{{ ticket.impacto.color }} me-1"></span>{{ ticket.impacto.descripcion }}
     </td>
     <td>
+      <app-ticket-detalle
+        [ticket]="ticket"
+        [readOnly]="false"
+        [nombreFormulario]="'Detalle del Ticket #' + ticket.id"
+        [modalId]="'editar-ticket-' + ticket.id" [usuariosSoporte]="usuariosSoporte"
+        (ticketProcesadoActualizadoNotificacion)="ticketActualizado($event)"
+      >
+      </app-ticket-detalle>
       <div class="btn-list flex-nowrap">
-        <a href="#" class="btn btn-bitbucket">
+        <button class="btn btn-bitbucket" data-bs-toggle="modal" [attr.data-bs-target]="'#editar-ticket-'+ticket.id">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-pencil-minus" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M8 20l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4h4z"></path>
@@ -54,8 +60,8 @@
             <path d="M16 18h4"></path>
           </svg>
           Editar
-        </a>
-        <a href="#" class="btn btn-danger">
+        </button>
+        <button class="btn btn-danger" (click)="cerrarTicket(ticket.id)">
           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-off" width="40" height="40" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <circle cx="6" cy="10" r="2"></circle>
@@ -72,7 +78,7 @@
             <path d="M3 3l18 18"></path>
           </svg>
           Cerrar
-        </a>
+        </button>
       </div>
     </td>
   </tr>

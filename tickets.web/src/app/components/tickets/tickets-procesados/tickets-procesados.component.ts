@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Ticket} from "../../../entities/ticket";
+import {Usuario} from "../../../entities/usuario";
+import {ApiResponse} from "../../../entities/api-response";
+import Swal from "sweetalert2";
 import {TicketsService} from "../../../services/tickets.service";
 
 @Component({
@@ -8,15 +12,40 @@ import {TicketsService} from "../../../services/tickets.service";
 })
 export class TicketsProcesadosComponent implements OnInit {
 
-  ticketsProcesados: any = []
+  @Output() notificarActualizacionTickets: EventEmitter<boolean> = new EventEmitter<boolean>()
+  @Input() ticketsProcesados: Ticket[] = []
+  @Input() usuariosSoporte: Usuario[] = []
 
   constructor(private ticketsService: TicketsService) { }
 
-  ngOnInit(): void {
-    this.ticketsService.cargarTicketsProcesados().subscribe((response: any) => {
-      let { extra } = response
-      this.ticketsProcesados = extra
+  ngOnInit(): void { }
+
+  actualizandoTickets(): any {
+    this.notificarActualizacionTickets.emit(true)
+  }
+
+  cerrarTicket(id: number): any {
+    this.ticketsService.cerrarTicket(id).subscribe((response: ApiResponse) => {
+      this.actualizandoTickets()
+
+      Swal.fire({
+        title: 'Ticket cerrado',
+        text: 'El ticket #' + id + ' ha sido cerrado',
+      })
+    }, (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ocurrió un error al cerrar el ticket',
+      })
     })
   }
 
+  ticketActualizado(actualizado: boolean): any {
+    if (actualizado) {
+      this.ticketsService.cargarTicketsProcesados().subscribe((response: ApiResponse) => {
+        this.ticketsProcesados = response.extra
+      })
+    }
+  }
 }

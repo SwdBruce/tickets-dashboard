@@ -44,13 +44,13 @@
         <div class="card-body">
           <div class="tab-content">
             <div class="tab-pane active show" id="tickets-nuevos" role="tabpanel">
-              <app-tickets-nuevos></app-tickets-nuevos>
+              <app-tickets-nuevos [ticketsNuevos]="ticketsNuevos" (notificarActualizacionTickets)="obtenerActualizacionTickets($event)" [usuariosSoporte]="usuariosSoporte"></app-tickets-nuevos>
             </div>
             <div class="tab-pane" id="tickets-procesados" role="tabpanel">
-              <app-tickets-procesados></app-tickets-procesados>
+              <app-tickets-procesados [ticketsProcesados]="ticketsProcesados" (notificarActualizacionTickets)="obtenerActualizacionTickets($event)" [usuariosSoporte]="usuariosSoporte"></app-tickets-procesados>
             </div>
             <div class="tab-pane" id="tickets-cerrados" role="tabpanel">
-              <app-tickets-cerrados></app-tickets-cerrados>
+              <app-tickets-cerrados [ticketsCerrados]="ticketsCerrados" (notificarActualizacionTickets)="obtenerActualizacionTickets($event)" [usuariosSoporte]="usuariosSoporte"></app-tickets-cerrados>
             </div>
           </div>
         </div>

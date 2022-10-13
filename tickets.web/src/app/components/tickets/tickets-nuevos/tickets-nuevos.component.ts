@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TicketsService} from "../../../services/tickets.service";
 import Swal from "sweetalert2";
 import {Ticket} from "../../../entities/ticket";
 import {ApiResponse} from "../../../entities/api-response";
+import {Usuario} from "../../../entities/usuario";
 
 @Component({
   selector: 'app-tickets-nuevos',
@@ -11,14 +12,18 @@ import {ApiResponse} from "../../../entities/api-response";
 })
 export class TicketsNuevosComponent implements OnInit {
 
+  @Output() notificarActualizacionTickets: EventEmitter<boolean> = new EventEmitter<boolean>()
   @Input() hideProcesarButton: boolean = false
-  ticketsNuevos: Ticket[] = []
-  ticketSeleccionado: Ticket = new Ticket()
+  @Input() ticketsNuevos: Ticket[] = []
+  @Input() requiereCargarTicketsNuevos: boolean = false
+  @Input() usuariosSoporte: Usuario[] = []
 
   constructor(private ticketsService: TicketsService) { }
 
   ngOnInit(): void {
-    this.cargarTicketsNuevos()
+    if (this.requiereCargarTicketsNuevos) {
+      this.cargarTicketsNuevos()
+    }
   }
 
   cargarTicketsNuevos(): any {
@@ -28,13 +33,9 @@ export class TicketsNuevosComponent implements OnInit {
     })
   }
 
-  verDetalleTicket(ticket: Ticket): any {
-    this.ticketSeleccionado = ticket
-  }
-
   procesarTickets(id?: number): any {
     this.ticketsService.procesarTicket(id).subscribe((response: ApiResponse) => {
-      this.cargarTicketsNuevos()
+      this.actualizandoTickets()
       // Swal.fire({
       //   title: 'Tickets procesados',
       //   text: id ? 'El ticket #' + id + ' ha sido procesado' : 'Los tickets han sido procesados',
@@ -46,5 +47,30 @@ export class TicketsNuevosComponent implements OnInit {
         text: 'Ocurrió un error al procesar los tickets',
       })
     })
+  }
+
+  cerrarTicket(id: number): any {
+    this.ticketsService.cerrarTicket(id).subscribe((response: ApiResponse) => {
+      if (this.requiereCargarTicketsNuevos) {
+        this.cargarTicketsNuevos()
+      } else {
+        this.actualizandoTickets()
+      }
+
+      Swal.fire({
+        title: 'Ticket cerrado',
+        text: 'El ticket #' + id + ' ha sido cerrado',
+      })
+    }, (error: any) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ocurrió un error al cerrar el ticket',
+      })
+    })
+  }
+
+  actualizandoTickets(): any {
+    this.notificarActualizacionTickets.emit(true)
   }
 }
