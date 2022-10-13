@@ -56,16 +56,32 @@ class TicketModel extends Model
         'asignado_id',
         'categoria_id',
         'area_id',
-        'estado'
+        'estado',
+        'fecha_creacion_txt'
     ];
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo('App\Models\UsuarioModel', 'usuario_id');
+        return $this->belongsTo(UsuarioModel::class, 'usuario_id');
     }
 
     public function asignado(): BelongsTo
     {
-        return $this->belongsTo('App\Models\UsuarioModel', 'asignado_id');
+        return $this->belongsTo(UsuarioModel::class, 'asignado_id');
+    }
+
+    public function categoria(): BelongsTo
+    {
+        return $this->belongsTo(CategoriaModel::class, 'categoria_id');
+    }
+
+    public function urgencia(): BelongsTo
+    {
+        return $this->belongsTo(UrgenciaModel::class, 'urgencia_id');
+    }
+
+    public function impacto(): BelongsTo
+    {
+        return $this->belongsTo(ImpactoModel::class, 'impacto_id');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TicketModel;
 use App\Models\UsuarioModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -18,9 +19,18 @@ class UsuarioController extends Controller
         $query = request()->query();
         $tipo = $query['tipo'] ?? null;
         $usuarios = match ($tipo) {
-            'admin' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_ADMIN)->get(),
-            'soporte' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_SUPPORT)->get(),
-            'usuario' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_USER)->get(),
+            'admin' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_ADMIN)->get()->map(function ($usuario) {
+                $usuario->area;
+                return $usuario;
+            }),
+            'soporte' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_SUPPORT)->get()->map(function ($usuario) {
+                $usuario->area;
+                return $usuario;
+            }),
+            'usuario' => UsuarioModel::where('rol_id', UsuarioModel::ROLE_USER)->get()->map(function ($usuario) {
+                $usuario->area;
+                return $usuario;
+            }),
             default => UsuarioModel::all(),
         };
 
@@ -153,5 +163,22 @@ class UsuarioController extends Controller
         $usuario->delete();
 
         return response()->success('Usuario eliminado correctamente');
+    }
+
+    public function ticketAsignadosPorUsuario()
+    {
+        $id = request()->id;
+        $tickets = TicketModel::where('asignado_id', $id)->where('estado', TicketModel::CREADO)->get();
+
+        return response()->success('Tickets obtenidos correctamente', $tickets->toArray());
+    }
+
+
+    public function historialPorUsuario()
+    {
+        $id = request()->id;
+        $tickets = TicketModel::where('asignado_id', $id)->where('estado', TicketModel::CERRADO)->orWhere('estado', TicketModel::PROCESADO)->get();
+
+        return response()->success('Tickets obtenidos correctamente', $tickets->toArray());
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\TicketModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TicketController extends Controller
 {
@@ -28,23 +29,24 @@ class TicketController extends Controller
         $validator = Validator::make($request->post(), [
             'titulo' => 'required|string|max:50',
             'descripcion' => 'required|string|max:500',
-            'estado' => 'required|integer',
             'usuario_id' => 'required|integer',
-            'categoria_id' => 'required|integer',
             'area_id' => 'required|integer'
         ]);
 
         if ($validator->fails()) {
-            return response()->error('Parámetros incorrectos.', $validator->errors()->toArray());
+            $errores = $validator->errors()->toArray();
+            // obtener el primer error
+            $error = array_shift($errores);
+            return response()->error('Parámetros incorrectos: '  . $error[0] ?? $error[0], $errores);
         }
 
         $ticket = TicketModel::create([
             'titulo' => $request->titulo,
             'descripcion' => $request->descripcion,
-            'estado' => $request->estado,
+            'estado' => TicketModel::CREADO,
             'usuario_id' => $request->usuario_id,
-            'categoria_id' => $request->categoria_id,
-            'area_id' => $request->area_id
+            'area_id' => $request->area_id,
+            'fecha_creacion_txt' => date('Y-m-d')
         ]);
 
         return response()->success('Ticket creado correctamente');
@@ -84,11 +86,14 @@ class TicketController extends Controller
 
         $validator = Validator::make($request->post(), [
             'titulo' => 'required|string|max:50',
-            'descripcion' => 'required|string|max:500',
-            'estado' => 'required|integer',
-            'usuario_id' => 'required|integer',
-            'categoria_id' => 'required|integer',
-            'area_id' => 'required|integer'
+            'descripcion' => 'string|max:1000',
+            'estado' => 'integer',
+            'usuario_id' => 'integer',
+            'asignado_id' => 'integer',
+            'categoria_id' => 'integer',
+            'impacto_id' => 'integer',
+            'urgencia_id' => 'integer',
+            'area_id' => 'integer'
         ]);
 
         if ($validator->fails()) {
@@ -107,11 +112,20 @@ class TicketController extends Controller
         if ($request->usuario_id) {
             $ticket->usuario_id = $request->usuario_id;
         }
+        if ($request->asignado_id) {
+            $ticket->asignado_id = $request->asignado_id;
+        }
         if ($request->categoria_id) {
             $ticket->categoria_id = $request->categoria_id;
         }
         if ($request->area_id) {
             $ticket->area_id = $request->area_id;
+        }
+        if ($request->impacto_id) {
+            $ticket->impacto_id = $request->impacto_id;
+        }
+        if ($request->urgencia_id) {
+            $ticket->urgencia_id = $request->urgencia_id;
         }
 
         $ticket->save();
@@ -150,5 +164,30 @@ class TicketController extends Controller
 //        }
 
         return response()->success('Tickets procesados correctamente');
+    }
+
+    public function cerrar()
+    {
+        $id = request()->id;
+        $ticket = TicketModel::find($id);
+        $ticket->estado = TicketModel::CERRADO;
+        $ticket->save();
+
+        return response()->success("Ticket #$id cerrado correctamente");
+    }
+
+    public function misTickets()
+    {
+        $id = request()->id;
+        $tickets = TicketModel::where('usuario_id', $id)->orderBy('id', 'DESC')->get()->take(20)->map(function ($ticket) {
+            $ticket->usuario;
+            $ticket->asignado;
+            $ticket->categoria;
+            $ticket->impacto;
+            $ticket->urgencia;
+            return $ticket;
+        });
+
+        return response()->success('Tickets obtenidos correctamente', $tickets->toArray());
     }
 }

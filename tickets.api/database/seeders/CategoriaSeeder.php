@@ -17,27 +17,21 @@ class CategoriaSeeder extends Seeder
     {
         DB::table('categoria')->insert([
             [
-                'nombre' => 'Importante',
-                'descripcion' => 'Importante',
-                'color' => '#FF0000',
+                'nombre' => 'Incidencia',
+                'descripcion' => 'Incidencia',
+                'color' => 'red',
                 'estado' => 1
             ],
             [
-                'nombre' => 'Moderado',
-                'descripcion' => 'Moderado',
-                'color' => '#FFA500',
+                'nombre' => 'Consulta',
+                'descripcion' => 'Consulta',
+                'color' => 'blue',
                 'estado' => 1
             ],
             [
-                'nombre' => 'Menor',
-                'descripcion' => 'Menor',
-                'color' => '#FFFF00',
-                'estado' => 1
-            ],
-            [
-                'nombre' => 'Sin prioridad',
-                'descripcion' => 'Sin prioridad',
-                'color' => '#00FF00',
+                'nombre' => 'General',
+                'descripcion' => 'General',
+                'color' => 'green',
                 'estado' => 1
             ]
         ]);

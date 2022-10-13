@@ -99,6 +99,9 @@ class EstadisticasGlobalesController extends Controller
         $ticketsProcesados = TicketModel::where('estado', TicketModel::PROCESADO)->get()->take(20)->map(function ($ticket) {
             $ticket->usuario;
             $ticket->asignado;
+            $ticket->categoria;
+            $ticket->impacto;
+            $ticket->urgencia;
             return $ticket;
         });
 
@@ -111,6 +114,9 @@ class EstadisticasGlobalesController extends Controller
         $ticketsProcesados = TicketModel::where('estado', TicketModel::CERRADO)->get()->take(20)->map(function ($ticket) {
             $ticket->usuario;
             $ticket->asignado;
+            $ticket->categoria;
+            $ticket->impacto;
+            $ticket->urgencia;
             return $ticket;
         });
 

@@ -23,8 +23,8 @@ return new class extends Migration
             $table->integer('asignado_id')->nullable();
             $table->integer('tipo')->nullable(); // clasificacion
             $table->integer('categoria_id')->nullable();
-            $table->integer('urgencia')->nullable();
-            $table->integer('impacto')->nullable();
+            $table->integer('urgencia_id')->nullable();
+            $table->integer('impacto_id')->nullable();
             $table->integer('estado')->default(TicketModel::CREADO);
             $table->string('fecha_creacion_txt')->nullable();
             $table->timestamps();

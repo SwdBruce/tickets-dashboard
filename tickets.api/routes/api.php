@@ -34,6 +34,10 @@ Route::group(['prefix' => 'tickets'], function () {
     Route::get('procesados', [EstadisticasGlobalesController::class, 'ticketsProcesados']);
     Route::get('cerrados', [EstadisticasGlobalesController::class, 'ticketsCerrados']);
     Route::get('procesar/{id?}', [TicketController::class, 'procesar']);
+    Route::get('cerrar/{id}', [TicketController::class, 'cerrar']);
+    Route::get('mis-tickets/{id}', [TicketController::class, 'misTickets']);
 });
 
+Route::apiResource('tickets', TicketController::class);
 Route::apiResource('usuario', UsuarioController::class);
+Route::get('usuario/asignaciones/{id}', [UsuarioController::class, 'ticketAsignadosPorUsuario']);
