@@ -98,7 +98,7 @@ export class InicioComponent implements OnInit {
           tooltip: {
             enabled: true
           },
-          type: 'datetime',
+          type: 'date',
         },
         yaxis: {
           labels: {
