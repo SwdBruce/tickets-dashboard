@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://tickets-project.azurewebsites.net/api'
+  baseUrl: 'http://localhost:8000/api'
 };
 
 /*

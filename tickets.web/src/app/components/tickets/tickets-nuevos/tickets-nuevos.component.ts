@@ -36,10 +36,10 @@ export class TicketsNuevosComponent implements OnInit {
   procesarTickets(id?: number): any {
     this.ticketsService.procesarTicket(id).subscribe((response: ApiResponse) => {
       this.actualizandoTickets()
-      // Swal.fire({
-      //   title: 'Tickets procesados',
-      //   text: id ? 'El ticket #' + id + ' ha sido procesado' : 'Los tickets han sido procesados',
-      // })
+      Swal.fire({
+        title: 'Tickets procesados',
+        text: id ? 'El ticket #' + id + ' ha sido procesado' : 'Los tickets han sido procesados',
+      })
     }, (error: any) => {
       Swal.fire({
         icon: 'error',
