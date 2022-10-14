@@ -5,6 +5,7 @@ import {UsuarioService} from "../../services/usuario.service";
 import {Usuario} from "../../entities/usuario";
 import {TicketsService} from "../../services/tickets.service";
 import Swal from "sweetalert2";
+import {UtilService} from "../../services/util.service";
 
 @Component({
   selector: 'app-ticket-detalle',
@@ -18,13 +19,14 @@ export class TicketDetalleComponent implements OnInit {
   @Input() nombreFormulario: string = 'Ticket'
   @Input() modalId: string = 'modal-ticket-detalle'
   @Input() usuariosSoporte: Usuario[] = []
+  @Input() tipo: string = 'none'
   @Output() ticketProcesadoActualizadoNotificacion: EventEmitter<boolean> = new EventEmitter<boolean>()
   asignadoId: number = 0
   categoriaId: number = 0
   urgenciaId: number = 0
   impactoId: number = 0
 
-  constructor(private usuarioService: UsuarioService, private ticketService: TicketsService) { }
+  constructor(private usuarioService: UsuarioService, private ticketService: TicketsService, private utilService: UtilService) { }
 
   ngOnInit(): void { }
 
@@ -46,6 +48,10 @@ export class TicketDetalleComponent implements OnInit {
 
   ticketProcesadoActualizado(): any {
     this.ticketProcesadoActualizadoNotificacion.emit(true)
+  }
+
+  areaNombre(areaId: number): string {
+    return this.utilService.areaNombre(areaId)
   }
 
   editarTicket(ticket: Ticket): any {

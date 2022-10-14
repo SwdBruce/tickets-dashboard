@@ -191,7 +191,7 @@ class TicketController extends Controller
         if ($response->successful()) {
             $data = $response->json();
             $ticket->asignado_id = rand(1, 50);
-            $ticket->categoria_id = $data['category'];
+            $ticket->categoria_id = in_array($data['category'], [1, 2, 3]) ? $data['category'] : 1;
             $ticket->impacto_id = $data['impact'];
             $ticket->urgencia_id = $data['urgency'];
             $ticket->estado = TicketModel::PROCESADO;

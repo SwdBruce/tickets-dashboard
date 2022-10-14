@@ -14,7 +14,7 @@
     <path d="M14 21v-2"></path>
     <path d="M10 21v-2"></path>
   </svg>
-  Procesar todos los tickets
+  Procesar tickets en pantalla
 </button>
 
 <table class="table table-vcenter table-mobile-md card-table">
@@ -44,7 +44,7 @@
     <td>
       <app-ticket-detalle [ticket]="ticket"
                           [readOnly]="true" [nombreFormulario]="'Detalle del Ticket #' + ticket.id"
-                          [modalId]="'nuevo-ticket-' + ticket.id" [usuariosSoporte]="usuariosSoporte">
+                          [modalId]="'nuevo-ticket-' + ticket.id" [usuariosSoporte]="usuariosSoporte" [tipo]="'nuevo'">
       </app-ticket-detalle>
       <div class="btn-list flex-nowrap">
         <button class="btn btn-vk" data-bs-toggle="modal" [attr.data-bs-target]="'#nuevo-ticket-' + ticket.id">

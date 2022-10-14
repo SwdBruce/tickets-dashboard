@@ -34,8 +34,12 @@ export class LoginComponent implements OnInit {
       }
 
       localStorage.setItem('access_token', extra.token)
-
-      this.router.navigate(['/dashboard/inicio'])
+      let user = this.authService.getUserData()
+      if (user.rol_id === 1) {
+        this.router.navigate(['/dashboard/inicio']);
+      } else {
+        this.router.navigate(['/dashboard/mis-tickets']);
+      }
     })
   }
 

@@ -84,7 +84,7 @@ class EstadisticasGlobalesController extends Controller
 
     public function ticketsNuevos()
     {
-        $ticketsNuevos = TicketModel::where('estado', TicketModel::CREADO)->get()->take(20)->map(function ($ticket) {
+        $ticketsNuevos = TicketModel::where('estado', TicketModel::CREADO)->orderBy('created_at', 'DESC')->get()->take(20)->map(function ($ticket) {
             $ticket->usuario;
             $ticket->asignado;
             return $ticket;
@@ -96,7 +96,7 @@ class EstadisticasGlobalesController extends Controller
     public function ticketsProcesados()
     {
         //ultimos 20 tickets
-        $ticketsProcesados = TicketModel::where('estado', TicketModel::PROCESADO)->get()->take(20)->map(function ($ticket) {
+        $ticketsProcesados = TicketModel::where('estado', TicketModel::PROCESADO)->orderBy('updated_at', 'DESC')->get()->take(20)->map(function ($ticket) {
             $ticket->usuario;
             $ticket->asignado;
             $ticket->categoria;
@@ -111,7 +111,7 @@ class EstadisticasGlobalesController extends Controller
     public function ticketsCerrados()
     {
         //ultimos 20 tickets
-        $ticketsProcesados = TicketModel::where('estado', TicketModel::CERRADO)->get()->take(20)->map(function ($ticket) {
+        $ticketsProcesados = TicketModel::where('estado', TicketModel::CERRADO)->orderBy('updated_at', 'DESC')->get()->take(20)->map(function ($ticket) {
             $ticket->usuario;
             $ticket->asignado;
             $ticket->categoria;

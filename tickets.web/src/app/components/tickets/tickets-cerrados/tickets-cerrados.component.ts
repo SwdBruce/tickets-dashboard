@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Usuario} from "../../../entities/usuario";
+import {Ticket} from "../../../entities/ticket";
 
 @Component({
   selector: 'app-tickets-cerrados',
@@ -9,7 +10,7 @@ import {Usuario} from "../../../entities/usuario";
 export class TicketsCerradosComponent implements OnInit {
 
   @Output() notificarActualizacionTickets: EventEmitter<boolean> = new EventEmitter<boolean>()
-  @Input() ticketsCerrados: any = []
+  @Input() ticketsCerrados: Ticket[] = []
   @Input() usuariosSoporte: Usuario[] = []
 
   constructor() { }

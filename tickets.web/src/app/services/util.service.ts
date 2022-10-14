@@ -39,4 +39,24 @@ export class UtilService {
         return 'secondary'
     }
   }
+
+  areaNombre(area_id: number): string {
+
+    switch (area_id) {
+      case 1:
+        return 'Administrativa'
+      case 2:
+        return 'Soporte'
+      case 3:
+        return 'Comercial'
+      case 4:
+        return 'Operaciones'
+      case 5:
+        return 'Sistemas'
+      case 6:
+        return 'Recursos Humanos'
+      default:
+        return 'Desconocido'
+    }
+  }
 }
